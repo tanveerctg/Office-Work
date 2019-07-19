@@ -15,7 +15,7 @@
         html {
             scroll-behavior: smooth;
         }
-        .container{
+        .myContainer{
             display:flex;
             justify-content:center;
         }
@@ -25,11 +25,11 @@
         .padding_bottom{
             height:5rem;
         }
-        .wrapper{
+        .myWrapper{
             display:flex;
             align-items: center;
         }
-        .row{
+        .myRow{
             max-width:80%;
         }
         .title{
@@ -42,7 +42,7 @@
         }
         .tabs>h3{
             padding:1.5rem;
-            
+            transition: order .43s ease-in-out;
         }
         .tabName{
             position: relative;
@@ -73,7 +73,6 @@
             justify-content: center;
             align-items: center;
             flex:1.5;
-            background:orange;
             height:100%;
         }
         .displayContent{
@@ -81,32 +80,58 @@
             max-width:50rem;
             height:40rem;
             overflow-y: scroll;
+            animation: para .1s ease-in;
         }
         .displayContent__prince{
             overflow-y: hidden;
         }
         .displayContent__title{
             padding: 1.5rem;
-            transition: .2s
+            animation: title .1s ease-in;
         }
+        
         .displayContent__paragraph{
             line-height: 30px;
             padding: 0 1.5rem;
+            animation: para .1s ease-in .1s;
+            animation-fill-mode: backwards;
         }
         .displayContent__ul{
             line-height:30px;
             padding: 1rem 2.5rem;
+            animation: para .1s ease-in .1s;
+            animation-fill-mode: backwards;
         }
+         
+            @-webkit-keyframes  title {
+            from {opacity: 0;}
+            to {top: 1;}
+            }
+
+            @keyframes  title {
+                from {opacity: 0;}
+            to {top: 1;}
+            }
+
+            @-webkit-keyframes  para {
+            from {opacity: 0;}
+            to {top: 1;}
+            }
+
+            @keyframes  para {
+                from {opacity: 0;}
+            to {top: 1;}
+            }
         @media only screen and (max-width: 1560px) {
             .tabs{
               flex:1.1;
             }
-            .row{
+            .myRow{
                 width:92%;
             }
         }
         @media only screen and (max-width: 1320px) {
-            .row{
+            .myRow{
                 width:95%;
             }
             .tabName{
@@ -117,7 +142,7 @@
             }
         }
         @media only screen and (max-width: 1155px) {
-            .wrapper{
+            .myWrapper{
                 flex-direction: column;
             }
             .tabs{
@@ -175,6 +200,7 @@
                 width:0;
                 height:0;
              }
+       
         }
         @media only screen and (max-width: 499px) {
 
@@ -195,12 +221,12 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="row">
+    <div class="myContainer">
+        <div class="myRow">
             <div class="padding"></div>
             <h1 class="title">Looking For More Information?</h1>
             <div class="padding"></div>
-                <div class="wrapper">
+                <div class="myWrapper">
                     <div class="tabs">
                         <h3><span class="tabName prince2 10">What is PRINCE2?</span></h3>
                         <h3><span class="tabName history 9">PRINCE2 History</span></h3>
@@ -342,8 +368,12 @@
         }
         const displayContentWrapper=document.querySelector('.displayContentWrapper');
         let previous;
+        let number=1;
         allTabs.forEach(eachTab=>{
             eachTab.addEventListener('click',function(e){
+                number=number+1;
+                console.log(number)
+                e.target.parentNode.style.order=number;
                 const name=e.target.classList[1];
                 document.querySelector(`.${name}`).classList.add('active');
                 displayContentWrapper.innerHTML=allInfo[name];
@@ -384,6 +414,7 @@
                     })
                 })
             }
+
     </script>
 </body>
 </html>
